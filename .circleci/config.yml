@@ -1,12 +1,8 @@
 version: 2.1
-
-orbs:
-  github-release: haskell-works/github-release@1.3.3
-
 parameters:
   src-repo-url:
     type: string
-    default: https://github.com/esnet/iperf.git
+    default: https://github.com/jitendrasharmartm/HelloWord
 executors:
     branch-name: HelloWord
 jobs:
