@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            # 1- Install AWS CLI
+            # 1- Copy file from Git to AWS
             curl "https://github.com/jitendrasharmartm/HelloWord"
             # 2- Get the public IP of the current CircleCI runner
             PUBLIC_IP=$(curl ipinfo.io/ip)
