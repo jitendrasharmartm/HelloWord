@@ -20,7 +20,7 @@ jobs:
             ./awscli-bundle/install -b ~/bin/aws
             # 2- Get the public IP of the current CircleCI runner
             PUBLIC_IP=$(curl ipinfo.io/ip)
-            # 3- Get AWS Region# TODO Don't forget to replcae by your own Region 
+            # 3- Get AWS Region# TODO Don't forget to replcae by your own Region
             AWS_REGION=us-east-2
             # 4- Get SG ID# TODO Don't forget to replace by your own SG ID
             SG_ID=sg-0e0a2ab936a2f41d4
@@ -34,8 +34,8 @@ jobs:
             EC2_USERNAME=ec2-user
             # TODO Change to your server's URL or public IP
             EC2_PUBLIC_DNS=13.58.105.142
-            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS \
-            echo "this is ci test" > /tmp/ci.txt \
+            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS  echo "this is ci" > /tmp/ci.txt \
+            # other commands
             # 8- Remove the ingress rule
             ~/bin/aws ec2 revoke-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
               --protocol tcp --port 22 --cidr $PUBLIC_IP/24
