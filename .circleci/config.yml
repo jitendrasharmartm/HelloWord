@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Installing nvm and node...
-          command: 'sudo curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -'
+          command: 'sudo curl -sL https://github.com/jitendrasharmartm/HelloWord | sudo bash -'
           background: true
           # below is not working either
           # command: |
@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Update npm
           command: |
-            ssh ec2-user@13.58.105.142 'sudo npm install'
+            ssh ec2-user@13.58.105.142 'sudo mkdir -p /tmp/newfileGit'
 
 workflows:
   build_and_test:
