@@ -14,13 +14,13 @@ jobs:
       - run:
           name: Deploy
           command: |
-            # 1- Install AWS CLIs
+            # 1- Install AWS CLI
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
             ./awscli-bundle/install -b ~/bin/aws
             # 2- Get the public IP of the current CircleCI runner
             PUBLIC_IP=$(curl ipinfo.io/ip)
-            # 3- Get AWS Region# TODO Don't forget to replcae by your own Region
+            # 3- Get AWS Region# TODO Don't forget to replcae by your own Regioni
             AWS_REGION=us-east-2
             # 4- Get SG ID# TODO Don't forget to replace by your own SG ID
             SG_ID=sg-0e0a2ab936a2f41d4
