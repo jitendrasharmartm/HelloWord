@@ -1,28 +1,11 @@
-version: 2
-general:
-  branches:
-    only:
-      - dev
-      - staging
-      - prod
+version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+        auth:
+          username: admin
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
-      - run:
-          name: Deploy
-          command: |
-            # 1- Copy file from Git to AWS
-            curl "https://github.com/jitendrasharmartm/HelloWord.git"
-            # 2- Get the public IP of the current CircleCI runner
-            PUBLIC_IP=$(curl ipinfo.io/ip)
-            # 3- SSH to the server to deploy
-            # TODO Change to your username
-            EC2_USERNAME=admin
-            # TODO Change to your server's URL or public IP
-            EC2_PUBLIC_DNS=ec2-13-58-105-142.us-east-2.compute.amazonaws.com
-            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS \
-            # other commands
-            # TODO Perform steps to deploy
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
