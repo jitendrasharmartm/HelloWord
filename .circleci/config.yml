@@ -37,7 +37,7 @@ jobs:
       - run:
           name: SSH
           command: |
-             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS  'echo "this is first circle ci" > /tmp/Firstci.txt'
+             ssh $EC2_USERNAME@$EC2_PUBLIC_DNS  'echo "this is first circle ci" > /tmp/Firstci.txt'
       - checkout:
       - run:
            command: echo "this is Second circle ci" > /tmp/Secondci2.txt
