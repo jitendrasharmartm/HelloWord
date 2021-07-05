@@ -15,12 +15,12 @@ jobs:
           name: Deploy
           command: |
             # 1- Copy file from Git to AWS
-            curl "https://github.com/jitendrasharmartm/HelloWord"
+            curl "https://github.com/jitendrasharmartm/HelloWord.git"
             # 2- Get the public IP of the current CircleCI runner
             PUBLIC_IP=$(curl ipinfo.io/ip)
             # 3- SSH to the server to deploy
             # TODO Change to your username
-            EC2_USERNAME=ec2-user
+            EC2_USERNAME=admin
             # TODO Change to your server's URL or public IP
             EC2_PUBLIC_DNS=ec2-13-58-105-142.us-east-2.compute.amazonaws.com
             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS \
