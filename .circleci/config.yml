@@ -20,7 +20,7 @@ jobs:
             ./awscli-bundle/install -b ~/bin/aws
             # 2- Get the public IP of the current CircleCI runner
             PUBLIC_IP=$(curl ipinfo.io/ip)
-            # 3- Get AWS Region# TODO Don't forget to replcae by your own Region
+            # 3- Get AWS Region# TODO Don't forget to replcae by your own Region 
             AWS_REGION=us-east-2
             # 4- Get SG ID# TODO Don't forget to replace by your own SG ID
             SG_ID=sg-0e0a2ab936a2f41d4
