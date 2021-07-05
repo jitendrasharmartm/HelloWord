@@ -37,4 +37,4 @@ jobs:
       - run:
           name: SSH
           command: |
-             ssh -t ec2-user@ec2-13-58-105-142.us-east-2.compute.amazonaws.com  'echo "this is first circle ci" > /tmp/Firstci.txt'
+             ssh ec2-user@ec2-13-58-105-142.us-east-2.compute.amazonaws.com  'echo "this is first circle ci" > /tmp/Firstci.txt'
