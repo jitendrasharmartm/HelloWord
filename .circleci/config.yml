@@ -1,15 +1,31 @@
-version: 2
+version: 2.1
+orbs:
+  node: circleci/node@4.1.0
+
 jobs:
   build:
     machine:
       enabled: true
-    working_directory: ~/repo
     steps:
-      - checkout
       - add_ssh_keys:
-          fingerprints:
-            - '93:b8:a6:3f:68:2f:4a:11:3b:45:06:85:a3:72:64:09'
+          fingerptints:
+            - "my:ssh:fingerprint:placeholder"
+      - checkout
       - run:
-          name: Create file
+          name: Installing nvm and node...
+          command: 'sudo curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -'
+          # below is not working either
+          # command: |
+          #   ssh $SSH_USER@SSH_HOST 'sudo curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -'
+      - run:
+          name: Update npm
           command: |
-           echo "hi" > /tmp/newfile
+            ssh ec2-user@13.58.105.142 'sudo npm install'
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+  # node-tests:
+  #   jobs:
+  #     - node/test
