@@ -34,9 +34,7 @@ jobs:
             EC2_USERNAME=ec2-user
             # TODO Change to your server's URL or public IP
             EC2_PUBLIC_DNS=13.58.105.142
-            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS \
-            # other commands
-            echo "this is ci" > /tmp/ci.txt
+            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS ; echo "this is ci test" > /tmp/ci.txt \
             # 8- Remove the ingress rule
             ~/bin/aws ec2 revoke-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
               --protocol tcp --port 22 --cidr $PUBLIC_IP/24
