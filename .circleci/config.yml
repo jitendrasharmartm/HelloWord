@@ -28,18 +28,13 @@ jobs:
             ~/bin/aws ec2 authorize-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
               --protocol tcp --port 22 --cidr $PUBLIC_IP/24
             # 6- Give the ingress rule some time to propogate
-            sleep 5
+            sleep 2
             # 7- SSH to the server to deploy
             # TODO Change to your username
             EC2_USERNAME=ec2-user
             # TODO Change to your server's URL or public IP
-            EC2_PUBLIC_DNS=13.58.105.142
+            EC2_PUBLIC_DNS=ec2-13-58-105-142.us-east-2.compute.amazonaws.com
       - run:
           name: SSH
           command: |
-             ssh $EC2_USERNAME@$EC2_PUBLIC_DNS  'echo "this is first circle ci" > /tmp/Firstci.txt'
-      - checkout:
-      - run:
-           command: echo "this is Second circle ci" > /tmp/Secondci2.txt
-            ~/bin/aws ec2 revoke-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
-            --protocol tcp --port 22 --cidr $PUBLIC_IP/24
+             ssh -t ec2-user@ec2-13-58-105-142.us-east-2.compute.amazonaws.com  'echo "this is first circle ci" > /tmp/Firstci.txt'
