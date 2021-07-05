@@ -13,8 +13,7 @@ jobs:
       - checkout
       - run:
           name: copy nodes from Github Repo to Ec2 Instance...
-          command: mkdir -p /tmp/Git_dir \
-            'cd /tmp/Git_dir | sudo curl -sL https://github.com/jitendrasharmartm/HelloWord'
+          command: cd /tmp/Git_dir | sudo curl -sL https://github.com/jitendrasharmartm/HelloWord
           background: true
 workflows:
   build_and_test:
