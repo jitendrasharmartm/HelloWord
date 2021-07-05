@@ -1,40 +1,15 @@
 version: 2
-general:
-  branches:
-    only:
-      - dev
-      - staging
-      - prod
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    machine:
+      enabled: true
+    working_directory: ~/repo
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - '93:b8:a6:3f:68:2f:4a:11:3b:45:06:85:a3:72:64:09'
       - run:
-          name: Deploy
+          name: Create file
           command: |
-            # 1- Install AWS CLIs
-            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            unzip awscli-bundle.zip
-            ./awscli-bundle/install -b ~/bin/aws
-            # 2- Get the public IP of the current CircleCI runner
-            PUBLIC_IP=$(curl ipinfo.io/ip)
-            # 3- Get AWS Region# TODO Don't forget to replcae by your own Regioni
-            AWS_REGION=us-east-2
-            # 4- Get SG ID# TODO Don't forget to replace by your own SG ID
-            SG_ID=sg-0e0a2ab936a2f41d4
-            # 5- Add an ingress rule to the security group
-            ~/bin/aws ec2 authorize-security-group-ingress --region $AWS_REGION --group-id $SG_ID \
-              --protocol tcp --port 22 --cidr $PUBLIC_IP/24
-            # 6- Give the ingress rule some time to propogate
-            sleep 2
-            # 7- SSH to the server to deploy
-            # TODO Change to your username
-            EC2_USERNAME=ec2-user
-            # TODO Change to your server's URL or public IP
-            EC2_PUBLIC_DNS=ec2-13-58-105-142.us-east-2.compute.amazonaws.com
-      - run:
-          name: SSH
-          command: |
-             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS \ echo "this is first circle ci" > /tmp/Firstci.txt \
+           ssh $SSH_USER@SSH_HOST 'echo "hi" > /tmp/newfile'
