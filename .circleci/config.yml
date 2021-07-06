@@ -9,7 +9,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerptints:
-            - "my:ssh:fingerprint:placeholder"
+            - "93:b8:a6:3f:68:2f:4a:11:3b:45:06:85:a3:72:64:09"
       - checkout
       - run:
           name: copy nodes from Github Repo to Ec2 Instance...
