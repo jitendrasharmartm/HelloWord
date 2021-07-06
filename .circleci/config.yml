@@ -9,11 +9,11 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerptints:
-            - '93:b8:a6:3f:68:2f:4a:11:3b:45:06:85:a3:72:64:09'
+            - "my:ssh:fingerprint:placeholder"
       - checkout
       - run:
           name: copy nodes from Github Repo to Ec2 Instance...
-          command: sudo git-clone https://github.com/jitendrasharmartm/HelloWord
+          command: sudo scp -o https://github.com/jitendrasharmartm/HelloWord /tmp
           background: true
 workflows:
   build_and_test:
