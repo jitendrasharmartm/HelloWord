@@ -1,24 +1,28 @@
-version: 2.1
-orbs:
-  node: circleci/node@4.1.0
-
+version: 2
 jobs:
   build:
     machine:
       enabled: true
+    working_directory: ~/repo
     steps:
-      - add_ssh_keys:
-          fingerptints:
-            - "93:b8:a6:3f:68:2f:4a:11:3b:45:06:85:a3:72:64:09"
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - '93:b8:a6:3f:68:2f:4a:11:3b:45:06:85:a3:72:64:09'
       - run:
-          name: copy nodes from Github Repo to Ec2 Instance...
-          command: 'touch circleCI.txt'
-          background: true
+          name: Deploy Over SSH
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              scp -r * <user>@<host>:<path>
+            else
+              echo "Not master branch, do nothing"
+            fi
+
 workflows:
-  build_and_test:
+  version: 2
+  build:
     jobs:
-      - build
-  # node-tests:
-  #   jobs:
-  #     - node/tests
+      - build:
+          filters:
+            branches:
+              only: master
