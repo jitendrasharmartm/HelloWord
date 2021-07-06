@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: copy nodes from Github Repo to Ec2 Instance...
-          command: touch circleCI.txt
+          command: 'touch circleCI.txt'
           background: true
 workflows:
   build_and_test:
