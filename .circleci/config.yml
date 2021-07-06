@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: copy nodes from Github Repo to Ec2 Instance...
-          command: sudo scp -o https://github.com/jitendrasharmartm/HelloWord /tmp
+          command: echo "This is test filr created by CricleCI" > /tmp/Test1.txt
           background: true
 workflows:
   build_and_test:
